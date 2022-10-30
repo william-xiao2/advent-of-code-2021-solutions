@@ -2,7 +2,7 @@ package solution;
 
 import util.FileAccessor;
 
-import java.util.List;
+import java.util.stream.IntStream;
 
 public class Day1 {
 
@@ -12,12 +12,9 @@ public class Day1 {
                 .mapToInt(Integer::valueOf)
                 .toArray();
 
-        int numIncreases = 0;
-        for (int i = 1; i < measurements.length; i++) {
-            if (measurements[i] > measurements[i-1]) {
-                numIncreases++;
-            }
-        }
+        final long numIncreases = IntStream.range(1, measurements.length)
+                .filter(i -> measurements[i] > measurements[i-1])
+                .count();
 
         System.out.println("The number of measurements that are larger than the previous measurement is " + numIncreases);
     }
